@@ -27,9 +27,26 @@ Short reference documents focused on disciplined LLM-assisted engineering workfl
 - `six-principles-for-engineers.md`
   Six concise principles covering project context, reuse of proven patterns, incremental work, validation, milestone review, and evidence-based reasoning.
 
+### `evaluations/`
+
+Benchmark cases for testing prompt quality and model behavior on repeatable engineering-oriented tasks.
+
+- `README.md`
+  Defines the shared evaluation case format: task, input, expected behavior, failure modes, and notes.
+- `summarization/`
+  Cases for concise, faithful compression of technical guidance and constraint-heavy instructions.
+- `critique/`
+  Cases for code review and argument analysis.
+- `refactoring-guidance/`
+  Cases for advice that must preserve local project conventions.
+- `bug-triage/`
+  Cases for diagnosis under incomplete evidence.
+- `failure-examples/`
+  Cases designed to expose over-scoping and hallucination pressure failures.
+
 ## Repository Purpose
 
-This repository currently functions as a lightweight document library. It does not contain application code, tooling, or automation scripts. Its value is the prompt text and process guidance stored in Markdown files.
+This repository currently functions as a lightweight document library. It does not contain application code, tooling, or automation scripts. Its value is in prompt text, engineering guidance, and evaluation cases stored in Markdown files.
 
 ## License
 
