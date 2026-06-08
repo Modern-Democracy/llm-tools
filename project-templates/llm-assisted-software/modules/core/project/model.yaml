@@ -1,0 +1,43 @@
+schema_version: 1
+project:
+  key: llm-assisted-software
+  name: LLM-Assisted Software Project
+  purpose: Provide a repeatable project design, administration, knowledge, automation, and implementation scaffold for software projects assisted by LLMs.
+  audience:
+    - software engineers
+    - project maintainers
+    - technical leads
+lifecycle:
+  roles:
+    - Project Management
+    - Business Analyst
+    - Coding Architect
+    - Implementation
+    - QA Reviewer
+  default_flow:
+    - classify
+    - clarify
+    - design
+    - implement
+    - verify
+technology_defaults:
+  canonical_source: Git files
+  generated_output_root: build/project-templates/llm-assisted-software
+  automation_boundary: Docker Compose
+  web_runtime: Node service with static HTML, CSS, and first-party JavaScript
+  database_runtime: Optional PostgreSQL
+  dependency_posture: Limited third-party dependencies by default
+modules:
+  - core
+  - automation
+  - web-ui
+  - database-postgres
+  - llm-tools
+knowledge:
+  wiki_root: wiki
+  required_pages:
+    - wiki/AGENTS.md
+    - wiki/index.md
+    - wiki/log.md
+  source_rule: Raw sources remain authoritative; wiki pages summarize and connect source facts.
+  maintenance_rule: Update the wiki when work creates durable project knowledge.

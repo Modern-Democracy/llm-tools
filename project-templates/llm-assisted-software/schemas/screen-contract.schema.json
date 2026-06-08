@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://llm-tools.local/schemas/screen-contract.schema.json",
+  "title": "Screen Contract",
+  "type": "object",
+  "required": ["schema_version", "screen_key", "route", "purpose", "context", "data_sources", "actions", "states"],
+  "additionalProperties": true,
+  "properties": {
+    "schema_version": { "type": "integer", "minimum": 1 },
+    "screen_key": { "type": "string", "pattern": "^[a-z0-9][a-z0-9-]*$" },
+    "route": { "type": "string", "pattern": "^/" },
+    "purpose": { "type": "string", "minLength": 1 },
+    "context": { "type": "array", "items": { "type": "string" } },
+    "data_sources": { "type": "array", "items": { "type": "string" } },
+    "actions": { "type": "array", "items": { "type": "string" } },
+    "states": { "type": "array", "items": { "type": "string" } },
+    "linked_apis": { "type": "array", "items": { "type": "string" } }
+  }
+}

@@ -1,0 +1,29 @@
+schema_version: 1
+screen_key: project-model-viewer
+route: /project-model
+purpose: Visualize the project model, module boundaries, API contracts, screen contracts, workflows, decisions, and wiki status.
+context:
+  - selected project template
+  - selected module
+  - selected model node
+  - generated model status
+data_sources:
+  - /api/project-model
+  - /api/project-model/patches
+actions:
+  - inspect module
+  - inspect API contract
+  - inspect screen contract
+  - inspect workflow
+  - create patch proposal
+  - open canonical source reference
+states:
+  - loading
+  - ready
+  - empty
+  - invalid_model
+  - missing_generated_model
+  - patch_pending
+  - error
+linked_apis:
+  - project-model

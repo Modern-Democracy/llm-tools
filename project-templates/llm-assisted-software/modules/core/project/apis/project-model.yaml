@@ -1,0 +1,58 @@
+schema_version: 1
+api_key: project-model
+purpose: Expose generated project model data and patch proposals to the local web UI.
+endpoints:
+  - method: GET
+    path: /api/project-model
+    purpose: Return the rendered project model graph.
+    inputs:
+      - none
+    outputs:
+      - project model JSON
+      - source file list
+      - generated timestamp
+    states:
+      - ready
+      - missing_generated_model
+      - invalid_model
+      - server_error
+    write_boundary: read_only
+    provenance:
+      - canonical YAML source paths
+      - source file hashes
+  - method: GET
+    path: /api/project-model/patches
+    purpose: List pending patch proposal records.
+    inputs:
+      - patch proposal directory
+    outputs:
+      - patch proposal summaries
+    states:
+      - ready
+      - empty
+      - server_error
+    write_boundary: read_only
+    provenance:
+      - patch file path
+      - patch base hash
+  - method: POST
+    path: /api/project-model/patches
+    purpose: Save a reviewable patch proposal without editing canonical files.
+    inputs:
+      - target file
+      - base hash
+      - operation list
+      - rationale
+    outputs:
+      - patch proposal key
+      - patch proposal path
+    states:
+      - created
+      - validation_error
+      - conflict
+      - server_error
+    write_boundary: patch_proposal
+    provenance:
+      - target file
+      - base hash
+      - proposal source

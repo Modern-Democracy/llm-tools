@@ -1,0 +1,45 @@
+schema_version: 1
+module: automation
+runtime: container-first
+host_requirements:
+  - Docker
+  - Git
+commands:
+  - key: validate
+    purpose: Validate canonical template files and write a validation report.
+    command: node project-templates/llm-assisted-software/tools/llm-template.mjs validate
+    writes:
+      - build/project-templates/llm-assisted-software/validation-report.json
+  - key: render
+    purpose: Render deterministic generated project model artifacts.
+    command: node project-templates/llm-assisted-software/tools/llm-template.mjs render
+    writes:
+      - build/project-templates/llm-assisted-software/project-model.json
+      - build/project-templates/llm-assisted-software/project-model.graph.json
+      - build/project-templates/llm-assisted-software/generated-wiki-preview
+      - build/project-templates/llm-assisted-software/generated-db
+      - build/project-templates/llm-assisted-software/generated-web-model
+  - key: wiki-lint
+    purpose: Check wiki scaffold page conventions.
+    command: node project-templates/llm-assisted-software/tools/llm-template.mjs wiki-lint
+    writes:
+      - build/project-templates/llm-assisted-software/validation-report.json
+  - key: doctor
+    purpose: Report local environment and repository status.
+    command: node project-templates/llm-assisted-software/tools/llm-template.mjs doctor
+    writes: []
+  - key: backup
+    purpose: Package canonical files and patch proposals for backup.
+    command: node project-templates/llm-assisted-software/tools/llm-template.mjs backup
+    writes:
+      - build/project-templates/llm-assisted-software/backups
+  - key: restore
+    purpose: Restore from a previously created template backup.
+    command: node project-templates/llm-assisted-software/tools/llm-template.mjs restore
+    writes:
+      - project-templates/llm-assisted-software
+  - key: upgrade-check
+    purpose: Compare canonical files against a newer template package.
+    command: node project-templates/llm-assisted-software/tools/llm-template.mjs upgrade-check
+    writes:
+      - build/project-templates/llm-assisted-software/upgrade-check.json

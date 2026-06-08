@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://llm-tools.local/schemas/api-contract.schema.json",
+  "title": "API Contract",
+  "type": "object",
+  "required": ["schema_version", "api_key", "purpose", "endpoints"],
+  "additionalProperties": true,
+  "properties": {
+    "schema_version": { "type": "integer", "minimum": 1 },
+    "api_key": { "type": "string", "pattern": "^[a-z0-9][a-z0-9-]*$" },
+    "purpose": { "type": "string", "minLength": 1 },
+    "endpoints": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["method", "path", "purpose", "inputs", "outputs", "states", "write_boundary"],
+        "properties": {
+          "method": { "type": "string", "enum": ["GET", "POST", "PUT", "PATCH", "DELETE"] },
+          "path": { "type": "string", "pattern": "^/" },
+          "purpose": { "type": "string", "minLength": 1 },
+          "inputs": { "type": "array", "items": { "type": "string" } },
+          "outputs": { "type": "array", "items": { "type": "string" } },
+          "states": { "type": "array", "items": { "type": "string" } },
+          "write_boundary": { "type": "string", "enum": ["read_only", "patch_proposal", "local_admin", "unavailable"] },
+          "provenance": { "type": "array", "items": { "type": "string" } }
+        }
+      }
+    }
+  }
+}

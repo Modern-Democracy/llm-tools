@@ -1,0 +1,61 @@
+schema_version: 1
+template_key: llm-assisted-software
+name: LLM-Assisted Software Project
+version: 0.1.0
+status: draft
+description: Versioned starter package for disciplined LLM-assisted software projects.
+canonical_source: git_files
+generated_root: build/project-templates/llm-assisted-software
+patch_output: project-templates/llm-assisted-software/patches
+dependency_policy:
+  default_posture: limited_dependencies
+  host_requirements:
+    - Docker
+    - Git
+  allowed_core_runtime:
+    - Node.js in automation container
+  third_party_rule: Add a dependency only when its value clearly exceeds local implementation cost.
+modules:
+  - key: core
+    required: true
+    path: modules/core
+    summary: Project model, role gates, wiki scaffold, and source layout conventions.
+  - key: automation
+    required: true
+    path: modules/automation
+    summary: Container-first validation, rendering, linting, diagnostics, backup, restore, and upgrade checks.
+  - key: web-ui
+    required: false
+    path: modules/web-ui
+    summary: Static project model viewer/editor backed by generated JSON and patch proposals.
+  - key: database-postgres
+    required: false
+    path: modules/database-postgres
+    summary: PostgreSQL materialization schema for project model querying and patch tracking.
+  - key: llm-tools
+    required: false
+    path: modules/llm-tools
+    summary: Assistant role, prompt, and tool-boundary configuration guidance.
+artifacts:
+  canonical:
+    - template.yaml
+    - modules/core/project/model.yaml
+    - modules/core/project/apis/project-model.yaml
+    - modules/core/project/screens/project-model-viewer.yaml
+    - modules/core/project/workflows/role-gated-delivery.yaml
+    - modules/core/project/decisions/0001-git-files-are-canonical.md
+  generated:
+    - build/project-templates/llm-assisted-software/project-model.json
+    - build/project-templates/llm-assisted-software/project-model.graph.json
+    - build/project-templates/llm-assisted-software/validation-report.json
+interfaces:
+  web_api:
+    - method: GET
+      path: /api/project-model
+      source: generated project model
+    - method: GET
+      path: /api/project-model/patches
+      source: patch proposal directory
+    - method: POST
+      path: /api/project-model/patches
+      source: patch proposal writer

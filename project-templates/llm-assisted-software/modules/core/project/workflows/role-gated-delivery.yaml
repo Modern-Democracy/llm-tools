@@ -1,0 +1,30 @@
+schema_version: 1
+workflow_key: role-gated-delivery
+purpose: Gate LLM-assisted project work through classification, clarification, architecture, implementation, and QA.
+steps:
+  - role: Project Management
+    action: Classify objective, scope, affected artifacts, ambiguity, wiki context, and next role.
+    output: Task classification and route.
+  - role: Business Analyst
+    action: Clarify goal, success criteria, audience, constraints, scenarios, and edge cases when behavior or requirements are ambiguous.
+    output: Decision-complete requirements.
+  - role: Coding Architect
+    action: Define module boundaries, interfaces, schemas, workflow effects, dependency posture, and QA checks.
+    output: Viable implementation design.
+  - role: Implementation
+    action: Apply the smallest approved change using existing patterns and preserving canonical/generated boundaries.
+    output: Code, docs, data, or configuration changes.
+  - role: QA Reviewer
+    action: Verify discriminating acceptance claims and report residual risks.
+    output: QA evidence and completion status.
+stop_conditions:
+  - Ambiguity changes schema, behavior, workflow, compatibility, or public interface.
+  - Source patterns do not fit the approved template.
+  - Implementation would widen beyond approved files or identifiers.
+  - Validation cannot distinguish success from failure.
+acceptance_checks:
+  - Canonical files validate against schemas.
+  - Generated files are deterministic.
+  - UI patch proposals do not rewrite canonical files.
+  - Wiki scaffold passes link and frontmatter checks.
+  - Optional database materialization preserves natural keys and content hashes.

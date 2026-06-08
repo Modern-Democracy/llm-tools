@@ -1,0 +1,10 @@
+name: llm-assisted-software-template
+
+services:
+  llm-template:
+    build:
+      context: ../../../..
+      dockerfile: project-templates/llm-assisted-software/modules/automation/Dockerfile
+    working_dir: /workspace
+    volumes:
+      - ../../../..:/workspace

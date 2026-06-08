@@ -1,0 +1,73 @@
+:root {
+  color-scheme: light;
+  font-family: Arial, sans-serif;
+  color: #17202a;
+  background: #f7f8fa;
+}
+
+body {
+  margin: 0;
+}
+
+.app-header {
+  background: #ffffff;
+  border-bottom: 1px solid #d8dee6;
+  padding: 16px 24px;
+}
+
+.app-header h1 {
+  font-size: 24px;
+  line-height: 1.2;
+  margin: 0 0 4px;
+}
+
+.app-header p {
+  margin: 0;
+  color: #52606d;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  padding: 16px 24px;
+}
+
+section {
+  background: #ffffff;
+  border: 1px solid #d8dee6;
+  border-radius: 6px;
+  padding: 16px;
+}
+
+h2 {
+  font-size: 16px;
+  margin: 0 0 12px;
+}
+
+.item {
+  border-top: 1px solid #e5e9f0;
+  padding: 10px 0;
+}
+
+.item:first-child {
+  border-top: 0;
+}
+
+.item strong {
+  display: block;
+  font-size: 14px;
+}
+
+.item span {
+  color: #52606d;
+  display: block;
+  font-size: 13px;
+  margin-top: 4px;
+}
+
+@media (max-width: 840px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+}

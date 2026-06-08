@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://llm-tools.local/schemas/project-model.schema.json",
+  "title": "Project Model",
+  "type": "object",
+  "required": ["schema_version", "project", "lifecycle", "technology_defaults", "modules", "knowledge"],
+  "additionalProperties": true,
+  "properties": {
+    "schema_version": { "type": "integer", "minimum": 1 },
+    "project": {
+      "type": "object",
+      "required": ["key", "name", "purpose"],
+      "properties": {
+        "key": { "type": "string", "pattern": "^[a-z0-9][a-z0-9-]*$" },
+        "name": { "type": "string", "minLength": 1 },
+        "purpose": { "type": "string", "minLength": 1 },
+        "audience": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "lifecycle": {
+      "type": "object",
+      "required": ["roles", "default_flow"],
+      "properties": {
+        "roles": { "type": "array", "items": { "type": "string" }, "minItems": 1 },
+        "default_flow": { "type": "array", "items": { "type": "string" }, "minItems": 1 }
+      }
+    },
+    "technology_defaults": { "type": "object" },
+    "modules": { "type": "array", "items": { "type": "string" }, "minItems": 1 },
+    "knowledge": { "type": "object" }
+  }
+}
